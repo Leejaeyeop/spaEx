@@ -12,12 +12,19 @@ export default function App({ $target }) {
             ...nextState,
         };
 
+        console.log(this.state);
         input.setState({});
     };
     let input = null;
     this.render = () => {
         $target.innerHTML = `<div>home</div>`;
-        input = new Input({ $target });
+        const onChange = (e) => {
+            console.log(e);
+        };
+        const initialState = {
+            value: "default",
+        };
+        input = new Input({ $target, onChange, initialState });
     };
     this.render();
 
@@ -28,6 +35,8 @@ export default function App({ $target }) {
     routerInit(onRouteChange);
     window.addEventListener("popstate", onRouteChange);
 
+    this.setState({ list: [1, 2, 3] });
+    input.setState({ value: "default2" });
     // test
     // routerChange("about");
 }
